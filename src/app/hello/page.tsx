@@ -1,3 +1,3 @@
 export default function Page() {
-  return <>World</>;
+  return <>World : {process.env.POSTGRES_PORT}</>;
 }
