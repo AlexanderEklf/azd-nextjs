@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 export default async function Page() {
   const data = (await fetch("https://pokeapi.co/api/v2/pokemon/ditto").then(
     (x) => x.json()
