@@ -117,6 +117,16 @@ module azdNextjs 'br/public:avm/res/app/container-app:0.8.0' = {
           name: 'db-url'
           value: 'postgresql://${postgresDatabaseUser}:${postgresDatabasePassword}@${postgresServer.outputs.fqdn}:5432/${postgresDatabaseName}'
         }
+        {
+          name: 'redis-pass'
+          identity:azdNextjsIdentity.outputs.resourceId
+          keyVaultUrl: redis.outputs.exportedSecrets['redis-password'].secretUri
+        }
+        {
+          name: 'redis-url'
+          identity:azdNextjsIdentity.outputs.resourceId
+          keyVaultUrl: redis.outputs.exportedSecrets['redis-url'].secretUri
+        }
       ]
     }
     containers: [
@@ -159,6 +169,26 @@ module azdNextjs 'br/public:avm/res/app/container-app:0.8.0' = {
           {
             name: 'POSTGRES_PORT'
             value: '5432'
+          }
+          {
+            name: 'REDIS_HOST'
+            value: redis.outputs.hostName
+          }
+          {
+            name: 'REDIS_PORT'
+            value: string(redis.outputs.sslPort)
+          }
+          {
+            name: 'REDIS_ENDPOINT'
+            value: '${redis.outputs.hostName}:${string(redis.outputs.sslPort)}'
+          }
+          {
+            name: 'REDIS_URL'
+            secretRef: 'redis-url'
+          }
+          {
+            name: 'REDIS_PASSWORD'
+            secretRef: 'redis-pass'
           }
           {
             name: 'AZURE_KEY_VAULT_NAME'

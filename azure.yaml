@@ -13,6 +13,7 @@ resources:
     port: 80
     uses:
       - azd-nextjs-db
+      - redis
   azd-nextjs-db:
     type: db.postgres
   vault:
