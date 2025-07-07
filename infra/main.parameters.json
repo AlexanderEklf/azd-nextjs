@@ -8,6 +8,9 @@
       "location": {
         "value": "${AZURE_LOCATION}"
       },
+      "postgresDatabasePassword": {
+        "value": "$(secretOrRandomPassword ${AZURE_KEY_VAULT_NAME} postgres-password)"
+      },
       "azdNextjsExists": {
         "value": "${SERVICE_AZD_NEXTJS_RESOURCE_EXISTS=false}"
       },

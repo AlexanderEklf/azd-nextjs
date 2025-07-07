@@ -1,14 +1,21 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-
 name: azd-nextjs
 metadata:
-    template: azd-init@1.17.2
+  template: azd-init@1.17.2
 services:
-    azd-nextjs:
-        project: .
-        host: containerapp
-        language: ts
+  azd-nextjs:
+    project: .
+    host: containerapp
+    language: ts
 resources:
-    azd-nextjs:
-        type: host.containerapp
-        port: 80
+  azd-nextjs:
+    type: host.containerapp
+    port: 80
+    uses:
+      - azd-nextjs-db
+  azd-nextjs-db:
+    type: db.postgres
+  vault:
+    type: keyvault
+  redis:
+    type: db.redis
